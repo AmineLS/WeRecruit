@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Careers";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - WeRecruit</title>
+    <link rel="stylesheet" href="~/css/submissions.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/global.css" asp-append-version="true"/>
+</head>
+<body style="height: 100vh; ">
+<aside class="w-25 bg-primary">
+    <div class="aside-header">
+        <img class="logo" src="~/img/logo.png" alt="WeRecruit Logo">
+        <h1>WeRecruit</h1>
+    </div>
+
+    <div class="aside-main">
+        <h3 class="aside-slogan">We are Hiring!</h3>
+        <ul class="grid-list">
+            <li>Software Engineer</li>
+            <li>Full-stack Developer</li>
+            <li>Android Developer</li>
+            <li>Designer</li>
+        </ul>
+        <img src="img/deal.svg" alt="Interview">
+    </div>
+    <div class="aside-footer">
+        Made with &hearts; for WeCount
+    </div>
+</aside>
+<main role="main">
+    <div class="container">
+        <h2 class="form-title">Resume Submission</h2>
+        <p class="form-description">Please fill out all the fields, we'll get back to you for opportinities that match you profile.</p>
+        <form action="">
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-input" id="firstName" name="firstName" placeholder="Amine">
+                </div>
+                <div class="form-group">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-input" id="lastName" name="lastName" placeholder="Lias">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-input" id="email" name="email" placeholder="contact.aminels@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" id="phoneNumber" name="phoneNumber" placeholder="0634287872">
+                </div>
+                <div class="form-group">
+                    <label for="studies" class="form-label">Studies</label>
+                    <select type="tel" class="form-input" id="studies" name="studies">
+                        <option value="2">Bac+2</option>
+                        <option value="3">Bac+3</option>
+                        <option value="4">Bac+4</option>
+                        <option value="5" selected>Bac+5</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="yoe" class="form-label">Years of Experience</label>
+                    <input type="number" min="0" max="10" class="form-input" id="yoe" name="yoe" placeholder="1">
+                </div>
+                <div class="form-group">
+                    <label for="lastEmployer" class="form-label">Last Employer</label>
+                    <input type="text" class="form-input" id="lastEmployer" name="lastEmployer" placeholder="SG ATS">
+                </div>
+                <div class="form-group">
+                    <label for="resume" class="form-label">Resume</label>
+                    <div class="form-file">
+                        <input type="file" accept="application/pdf,image/*" class="file-input" id="resume" name="resume">
+                    </div>
+                </div>
+                <button class="submit-button">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/submissions.js" asp-append-version="true"></script>
+</body>
+</html>
