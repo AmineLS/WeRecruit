@@ -1,4 +1,5 @@
 ﻿@{
+    
     ViewData["Title"] = "Careers";
 }
 
@@ -8,8 +9,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - WeRecruit</title>
-    <link rel="stylesheet" href="~/css/submissions.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/css/global.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/submissions.css"/>
+    <link rel="stylesheet" href="~/css/global.css"/>
 </head>
 <body style="height: 100vh; ">
 <aside class="w-25 bg-primary">
@@ -36,27 +37,27 @@
     <div class="container">
         <h2 class="form-title">Resume Submission</h2>
         <p class="form-description">Please fill out all the fields, we'll get back to you for opportinities that match you profile.</p>
-        <form action="">
+        <form method="post" enctype="multipart/form-data">
             <div class="form-container">
                 <div class="form-group">
                     <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-input" id="firstName" name="firstName" placeholder="Amine">
+                    <input type="text" class="form-input" id="firstName" name="FirstName" placeholder="Amine">
                 </div>
                 <div class="form-group">
                     <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" class="form-input" id="lastName" name="lastName" placeholder="Lias">
+                    <input type="text" class="form-input" id="lastName" name="LastName" placeholder="Lias">
                 </div>
                 <div class="form-group">
                     <label for="email" class="form-label">E-mail</label>
-                    <input type="email" class="form-input" id="email" name="email" placeholder="contact.aminels@gmail.com">
+                    <input type="email" class="form-input" id="email" name="Email" placeholder="contact.aminels@gmail.com">
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-input" id="phoneNumber" name="phoneNumber" placeholder="0634287872">
+                    <input type="tel" class="form-input" id="phoneNumber" name="Phone" placeholder="0634287872">
                 </div>
                 <div class="form-group">
                     <label for="studies" class="form-label">Studies</label>
-                    <select type="tel" class="form-input" id="studies" name="studies">
+                    <select type="tel" class="form-input" id="studies" name="Studies">
                         <option value="2">Bac+2</option>
                         <option value="3">Bac+3</option>
                         <option value="4">Bac+4</option>
@@ -65,16 +66,16 @@
                 </div>
                 <div class="form-group">
                     <label for="yoe" class="form-label">Years of Experience</label>
-                    <input type="number" min="0" max="10" class="form-input" id="yoe" name="yoe" placeholder="1">
+                    <input type="number" min="0" max="10" class="form-input" id="yoe" name="YearsOfExperience" placeholder="1">
                 </div>
                 <div class="form-group">
                     <label for="lastEmployer" class="form-label">Last Employer</label>
-                    <input type="text" class="form-input" id="lastEmployer" name="lastEmployer" placeholder="SG ATS">
+                    <input type="text" class="form-input" id="lastEmployer" name="LastEmployer" placeholder="SG ATS">
                 </div>
                 <div class="form-group">
                     <label for="resume" class="form-label">Resume</label>
                     <div class="form-file">
-                        <input type="file" accept="application/pdf,image/*" class="file-input" id="resume" name="resume">
+                        <input type="file" accept="application/pdf,image/*" class="file-input" id="resume" name="Resume">
                     </div>
                 </div>
                 <button class="submit-button">

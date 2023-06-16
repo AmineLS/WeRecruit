@@ -4,8 +4,17 @@ namespace WeRecruit.Controllers;
 
 public class SubmissionsController : Controller
 {
-    public IActionResult Index()
+    [Route("/")]
+    public IActionResult Get()
     {
-        return View();
+        return View("Index");
+    }
+    
+    [Route("/")]
+    [HttpPost]
+    public void Index(SubmissionDto submissionDto)
+    {
+        
+        Response.Redirect("/");
     }
 }

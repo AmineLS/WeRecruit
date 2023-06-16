@@ -15,8 +15,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Submissions}/{action=Index}/{id?}");
+app.MapControllers();
+
+await app.Services.GetRequiredService<ApplicationDbContext>().Database.EnsureCreatedAsync();
 
 app.Run();

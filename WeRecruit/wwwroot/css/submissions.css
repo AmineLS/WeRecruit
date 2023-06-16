@@ -102,7 +102,6 @@ main {
     font-size: 14px;
     color: #64748b;
     margin-top: 0;
-    margin-bottom: 24px;
     
 }
 
@@ -111,7 +110,8 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 12px
+    gap: 12px;
+    margin-top: 24px;
 }
 
 .form-group{
@@ -190,4 +190,14 @@ main {
 
 .submit-button:hover{
     background-color: #546a8a;
+}
+
+.error-message{
+    padding: 0;
+    margin: 0;
+    color: red;
+}
+
+.input-error{
+    border-color: red;
 }
