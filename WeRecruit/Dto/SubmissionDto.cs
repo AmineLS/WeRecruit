@@ -5,7 +5,7 @@ public record SubmissionDto(
     string LastName,
     string Email,
     string Phone,
-    string LevelOfStudies,
+    int LevelOfStudies,
     int YearsOfExperience,
     string LastEmployer,
     IFormFile Resume

@@ -10,5 +10,5 @@ public class Submission
     public int LevelOfStudies { get; set; }
     public int YearsOfExperience { get; set; }
     public string LastEmployer { get; set; }
-    public string Resume { get; set; }
+    public string ResumeDirectoryName { get; set; }
 }

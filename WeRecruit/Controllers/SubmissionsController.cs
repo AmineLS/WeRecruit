@@ -1,10 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WeRecruit.Dto;
+using WeRecruit.Services;
 
 namespace WeRecruit.Controllers;
 
 public class SubmissionsController : Controller
 {
+    private readonly ISubmissionsService _submissionsService;
+
+    public SubmissionsController(ISubmissionsService submissionsService)
+    {
+        _submissionsService = submissionsService;
+    }
+
     [Route("/")]
     public IActionResult Get()
     {
@@ -13,9 +21,9 @@ public class SubmissionsController : Controller
     
     [Route("/")]
     [HttpPost]
-    public void Index(SubmissionDto submissionDto)
+    public async Task Post(SubmissionDto submissionDto)
     {
-        
-        Response.Redirect("/");
+        var created = await _submissionsService.TryCreate(submissionDto);
+        Response.Redirect($"/?result={(created ? "success" : "error")}");
     }
 }
