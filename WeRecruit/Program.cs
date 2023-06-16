@@ -1,9 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using WeRecruit.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services
     .AddControllersWithViews()
     .AddRazorRuntimeCompilation();
+
+builder.Services
+    .AddDbContext<ApplicationDbContext>(options =>
+    {
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        options.UseSqlServer(connectionString);
+    });
+
 
 var app = builder.Build();
 
