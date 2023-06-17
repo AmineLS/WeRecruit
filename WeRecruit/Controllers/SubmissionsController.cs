@@ -8,9 +8,12 @@ public class SubmissionsController : Controller
 {
     private readonly ISubmissionsService _submissionsService;
 
-    public SubmissionsController(ISubmissionsService submissionsService)
+    private readonly IMailService _mailService;
+
+    public SubmissionsController(ISubmissionsService submissionsService, IMailService mailService)
     {
         _submissionsService = submissionsService;
+        _mailService = mailService;
     }
 
     [Route("/")]
@@ -24,6 +27,7 @@ public class SubmissionsController : Controller
     public async Task Post(SubmissionDto submissionDto)
     {
         var created = await _submissionsService.TryCreate(submissionDto);
+        if (created) _mailService.SendConfirmation(submissionDto.Email.Trim());
         Response.Redirect($"/?result={(created ? "success" : "error")}");
     }
 }

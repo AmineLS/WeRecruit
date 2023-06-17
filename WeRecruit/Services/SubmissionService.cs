@@ -8,7 +8,6 @@ public class SubmissionService : ISubmissionsService
 {
     private readonly ISubmissionsRepository _submissionsRepository;
     private readonly IResumeService _resumeService;
-    private readonly IMailService _mailService;
 
     public SubmissionService(
         ISubmissionsRepository submissionsRepository,
@@ -18,7 +17,6 @@ public class SubmissionService : ISubmissionsService
     {
         _submissionsRepository = submissionsRepository;
         _resumeService = resumeService;
-        _mailService = mailService;
     }
 
     public async Task<bool> TryCreate(SubmissionDto submissionDto)
@@ -41,11 +39,11 @@ public class SubmissionService : ISubmissionsService
         if (!saveResume) return false;
 
         var saveSubmission = await _submissionsRepository.TryAddSubmission(submission);
-        if (!saveSubmission)
-        {
-            await _resumeService.TryDelete(submission.ResumeDirectoryName);
-            return false;
-        }
+        if (saveSubmission) return true;
+
+        await _resumeService.TryDelete(submission.ResumeDirectoryName);
+        return false;
+    }
 
         _mailService.SendConfirmation(submission.Email);
 
