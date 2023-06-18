@@ -17,14 +17,22 @@ public class AuthController : Controller
     }
 
     [Route("/login")]
-    public IActionResult Get()
+    public IActionResult Login()
     {
+        if (User.Identity!.IsAuthenticated) Redirect("/home");
         return View("Index");
+    }
+    
+    [Route("/logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return Redirect("/login");
     }
 
     [HttpPost]
     [Route("/login")]
-    public async Task<IActionResult> Post(LoginDto loginDto)
+    public async Task<IActionResult> Login(LoginDto loginDto)
     {
         var (authenticated, admin) = await _authService.TryAuthenticateAdmin(loginDto);
 
