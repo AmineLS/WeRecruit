@@ -11,8 +11,7 @@ public class SubmissionService : ISubmissionsService
 
     public SubmissionService(
         ISubmissionsRepository submissionsRepository,
-        IResumeService resumeService,
-        IMailService mailService
+        IResumeService resumeService
     )
     {
         _submissionsRepository = submissionsRepository;

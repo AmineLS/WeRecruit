@@ -33,7 +33,7 @@ public class SubmissionRepository : ISubmissionsRepository
         try
         {
             var submission = await _dbContext.Submissions.FindAsync(submissionId);
-            _dbContext.Submissions.Remove(submission ?? throw new ArgumentException());
+            _dbContext.Submissions.Remove(submission ?? throw new ArgumentException("No submission was found for the given Id."));
             await _dbContext.SaveChangesAsync();
             return Tuple.Create(true, submission);
         }
