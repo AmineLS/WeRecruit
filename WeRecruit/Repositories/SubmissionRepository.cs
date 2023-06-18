@@ -1,4 +1,5 @@
-﻿using WeRecruit.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using WeRecruit.Data;
 using WeRecruit.Entities;
 
 namespace WeRecruit.Repositories;
@@ -13,17 +14,34 @@ public class SubmissionRepository : ISubmissionsRepository
         _dbContext = dbContext;
     }
 
-    public async Task<bool> TryAddSubmission(Submission submission)
+    public async Task<Tuple<bool, Submission>> TryCreate(Submission submission)
     {
         try
         {
-            await _dbContext.Submissions.AddAsync(submission);
+            var entityEntry = await _dbContext.Submissions.AddAsync(submission);
             await _dbContext.SaveChangesAsync();
+            return Tuple.Create(true, entityEntry.Entity);
         }
         catch
         {
-            return false;
+            return Tuple.Create(false, new Submission());
         }
-        return true;
     }
+
+    public async Task<Tuple<bool, Submission>> TryDelete(int submissionId)
+    {
+        try
+        {
+            var submission = await _dbContext.Submissions.FindAsync(submissionId);
+            _dbContext.Submissions.Remove(submission ?? throw new ArgumentException());
+            await _dbContext.SaveChangesAsync();
+            return Tuple.Create(true, submission);
+        }
+        catch
+        {
+            return Tuple.Create(false, new Submission());
+        }
+    }
+
+    public async Task<IEnumerable<Submission>> ReadAll() => await _dbContext.Submissions.ToListAsync();
 }

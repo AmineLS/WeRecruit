@@ -21,7 +21,7 @@ public class SubmissionService : ISubmissionsService
 
     public async Task<bool> TryCreate(SubmissionDto submissionDto)
     {
-        var capitalize = new Func<string, string>(str => char.ToUpper(str[0]) + str[1..]);
+        var capitalize = new Func<string, string>(str => char.ToUpper(str[0]) + str[1..].ToLower());
 
         var submission = new Submission
         {
@@ -32,21 +32,27 @@ public class SubmissionService : ISubmissionsService
             LevelOfStudies = submissionDto.LevelOfStudies,
             YearsOfExperience = submissionDto.YearsOfExperience,
             LastEmployer = submissionDto.LastEmployer.ToUpper(),
-            ResumeDirectoryName = $"{submissionDto.FirstName}_{submissionDto.LastName}"
         };
+        submission.ResumeDirectoryName = $"{submission.FirstName}_{submission.LastName}";
 
-        var saveResume = await _resumeService.TrySave(submission.ResumeDirectoryName, submissionDto.Resume);
-        if (!saveResume) return false;
+        var resumeSaved = await _resumeService.TrySave(submission.ResumeDirectoryName, submissionDto.Resume);
+        if (!resumeSaved) return false;
 
-        var saveSubmission = await _submissionsRepository.TryAddSubmission(submission);
-        if (saveSubmission) return true;
+        var (submissionSaved, _) = await _submissionsRepository.TryCreate(submission);
+        if (submissionSaved) return true;
 
         await _resumeService.TryDelete(submission.ResumeDirectoryName);
         return false;
     }
 
-        _mailService.SendConfirmation(submission.Email);
+    public async Task<bool> TryDelete(int submissionId)
+    {
+        var (submissionDeleted, submission) = await _submissionsRepository.TryDelete(submissionId);
+        if (!submissionDeleted) return false;
 
+        await _resumeService.TryDelete(submission.ResumeDirectoryName);
         return true;
     }
+
+    public async Task<IEnumerable<Submission>> ReadAll() => await _submissionsRepository.ReadAll();
 }

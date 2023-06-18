@@ -4,5 +4,7 @@ namespace WeRecruit.Repositories;
 
 public interface ISubmissionsRepository
 {
-    Task<bool> TryAddSubmission(Submission submission);
+    Task<Tuple<bool, Submission>> TryCreate(Submission submission);
+    Task<Tuple<bool, Submission>> TryDelete(int submissionId);
+    Task<IEnumerable<Submission>> ReadAll();
 }
