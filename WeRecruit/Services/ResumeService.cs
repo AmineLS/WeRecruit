@@ -26,18 +26,47 @@ public class ResumeService : IResumeService
         return true;
     }
 
-    public Task<bool> TryDelete(string targetDirectoryName)
+    public async Task<bool> TryDelete(string targetDirectoryName)
     {
         var fullPath = Path.Combine(_parentDirectoryPath, targetDirectoryName);
         try
         {
-            if (Directory.Exists(fullPath)) Directory.Delete(fullPath, true);
+            await Task.Run(() =>
+            {
+                if (Directory.Exists(fullPath)) Directory.Delete(fullPath, true);
+            });
         }
         catch
         {
-            return Task.FromResult(false);
+            return false;
         }
 
-        return Task.FromResult(true);
+        return true;
+    }
+
+    public async Task<Tuple<bool, FileStream>> TryGet(string targetDirectoryName)
+    {
+        var path = Path.Combine(_parentDirectoryPath, targetDirectoryName);
+
+        var noResult = Task.FromResult(Tuple.Create(false, (FileStream)null!));
+
+        try
+        {
+            return await Task.Run(() =>
+            {
+                if (!Path.Exists(path)) return noResult;
+
+                var files = Directory.GetFiles(path);
+                return files.Length == 0
+                    ? noResult
+                    : Task.FromResult(
+                        Tuple.Create(true, new FileStream(files.First(), FileMode.Open))
+                    );
+            });
+        }
+        catch
+        {
+            return await noResult;
+        }
     }
 }
