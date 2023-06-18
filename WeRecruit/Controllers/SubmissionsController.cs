@@ -27,7 +27,7 @@ public class SubmissionsController : Controller
     public async Task Create(SubmissionDto submissionDto)
     {
         var created = await _submissionsService.TryCreate(submissionDto);
-        if (created) _mailService.SendConfirmation(submissionDto.Email.Trim());
+        if (created) _mailService.Send(submissionDto.Email.Trim());
         Response.Redirect($"/?result={(created ? "success" : "error")}");
     }
 

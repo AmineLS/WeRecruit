@@ -2,5 +2,5 @@
 
 public interface IMailService
 {
-    void SendConfirmation(string email);
+    void Send(string email);
 }

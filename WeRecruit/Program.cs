@@ -1,12 +1,13 @@
+using System.Net.Mail;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using WeRecruit.Data;
 using WeRecruit.Entities;
+using WeRecruit.Model;
 using WeRecruit.Repositories;
 using WeRecruit.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services
     .AddControllersWithViews()
@@ -29,7 +30,14 @@ builder.Services.AddSingleton<IResumeService, ResumeService>(_ =>
     var parentDirectory = builder.Configuration.GetValue<string>("FileBucket");
     return new ResumeService(parentDirectory ?? throw new ArgumentNullException());
 });
-builder.Services.AddSingleton<IMailService, MailService>();
+builder.Services.AddSingleton<IMailService, MailService>(_ =>
+{
+    var smtpHost = builder.Configuration.GetValue<string>("SmtpServer:Host");
+    var smtpPort = builder.Configuration.GetValue<int>("SmtpServer:Port");
+    var smtpClient = new SmtpClient(smtpHost, smtpPort);
+    var mailTemplate = builder.Configuration.GetSection("MailTemplate").Get<MailTemplate>();
+    return new MailService(smtpClient, mailTemplate ?? throw new ArgumentNullException());
+});
 builder.Services.AddSingleton<IAuthService, AuthService>(_ =>
 {
     var admins = builder
@@ -41,8 +49,6 @@ builder.Services.AddSingleton<IAuthService, AuthService>(_ =>
 });
 
 var app = builder.Build();
-
-app.UseExceptionHandler("/Home/Error");
 
 app.UseStaticFiles();
 
