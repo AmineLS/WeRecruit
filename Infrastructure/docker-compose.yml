@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+  maildev:
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
