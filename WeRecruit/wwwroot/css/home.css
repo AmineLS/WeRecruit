@@ -8,26 +8,10 @@
     padding: 24px 12px;
 }
 
-.welcome-container{
-    display: flex;
-    align-items: end;
-    gap: 6px;
-    margin-bottom: 14px;
-}
-
 aside h3{
     font-weight: 600;
-    font-size: 22px;
-    margin: 0;
-    padding: 0;
-} 
-
-aside p{
-    font-weight: 400;
     font-size: 20px;
-    margin: 0;
-    padding: 0;
-} 
+}
 
 aside a{
     display: flex;
