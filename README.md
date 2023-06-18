@@ -62,6 +62,6 @@ You can customize various settings in the `appsettings.json` file, including:
 
 Feel free to explore and enhance the application based on your requirements.
 
-Thank you for!
+Thank you!
 
 ---
