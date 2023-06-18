@@ -39,13 +39,25 @@ main {
 
 
 .container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     width: 90%;
     height: min-content;
     max-height: 100%;
 }
 
-.alert{
-    margin-bottom: 12px;
+.input{
+    max-width: 100%;
+    outline-width: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.input::placeholder{
+    opacity: 0.5;
 }
 
 .table {
