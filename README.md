@@ -1,69 +1,67 @@
 # WeRecruit
 
-A simple recruitment portal using .NET 7, C#, ASP.NET MVC, SQL Server and Entity Framework
+WeRecruit is a simple recruitment portal built using .NET 7, C#, ASP.NET MVC, SQL Server, and Entity Framework.
 
 ## Routes
 
-``/``
+- **Public Home Page `/`:**
+   - Accessible to the public.
+   - Contains a form for submitting job applications.
+   - The form is client-side validated using jQuery.
 
-- Public.
-- contains form for submitting application.
-- the form is client-side validated using jQuery.
+- **Admin Login `/login`:**
+   - Public page for admin login.
+   - Default credentials:
+      - **Identifier**: admin
+      - **Password**: pass
+   - Admin credentials can be customized through the `appsettings.json` file.
 
-``/login``
+- **Dashboard `/home`:**
+   - Requires authentication.
+   - Displays a table showing all received job applications.
+   - Supports filtering based on multiple fields.
 
-- Public.
-- Log In for the Admin.
-- ``Identifier``: admin
-- ``Password``: pass
-- Credentials are customizable through ``appsettings.json``.
+- **Resume Access `/resume/{directory}`:**
+   - Requires authentication.
+   - Retrieves a resume file from the filesystem.
 
-``/logout``
+- **Submission Deletion `/submissions/{submissionId}/delete`:**
+   - Requires authentication.
+   - Deletes a job application from the database along with the associated resume file.
 
-- Log Out
+## Getting Started
 
-``/home``
+### Prerequisites
 
-- Requires authentication.
-- Contains table that shows all received applications.
-- The table can be filtered based on multiple fields using a text input.
-
-``/resume/{directory}``
-
-- Requires authentication.
-- Retrieves a Resume file from the filesystem.
-
-``/submissions/{submissionId}/delete``
-
-- Requires authentication.
-- Deletes a submission from the database along with the associated Resume file.
-
-## Run locally
-
-### Pre-requisites
+Make sure you have the following installed:
 
 1. .NET 7
 2. dotnet-ef (CLI tool)
 3. Docker
 
-### Steps
+### Setup Steps
 
-1. `cd` into the 'Infrastructure' folder: `cd Infrastructure`.
-2. Run the 'docker-compose.yml' file (contains MSSQL and SMTP servers): ``docker-compose up``.
-3. Run the EF migration ``dotnet ef database update``.
-4. `cd` into the project folder: ``cd ../WeRecruit``.
-5. Change `FileBucket` value in `appsettings.json`, put the path of the directory where you want to put the uploaded
-   files.
-6. Run the application : `dotnet run`.
-7. open `localhost:5079` on the browser to access the application.
-8. open `localhost:1080` on the browser to access the SMTP server UI.
+1. Open your terminal and navigate to the 'Infrastructure' folder: `cd Infrastructure`.
+2. Start the Docker containers (MSSQL and SMTP servers) by running the 'docker-compose.yml' file: `docker-compose up`.
+3. Run the EF migration to create the database: `dotnet ef database update`.
+4. Navigate to the project folder: `cd ../WeRecruit`.
+5. In the `appsettings.json` file, update the `FileBucket` value with the path to the directory where you want to store uploaded files.
+6. Start the application: `dotnet run`.
+7. Access the application in your browser by visiting `localhost:5079`.
+8. Access the SMTP server UI in your browser by visiting `localhost:1080`.
 
-### Settings
+### Customization
 
-through appsettings.json, you can:
+You can customize various settings in the `appsettings.json` file, including:
 
-- Change the MSSQL connection string, if you want to use another Server.
-- Change the path of the directory where you want to put uploaded files.
-- Change the SMTP Server.
-- Add/Change admin credentials.
-- Modify the template of the mail that gets sent as a confirmation after applying.
+- Change the MSSQL connection string to use a different server if needed.
+- Update the path of the directory where uploaded files will be stored.
+- Configure the SMTP server settings.
+- Add or modify admin credentials.
+- Modify the template of the email sent as a confirmation after submitting an application.
+
+Feel free to explore and enhance the application based on your requirements.
+
+Thank you for!
+
+---
