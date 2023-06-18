@@ -5,12 +5,12 @@ using WeRecruit.Services;
 
 namespace WeRecruit.Controllers;
 
-public class SubmissionsController : Controller
+public class SubmissionController : Controller
 {
     private readonly ISubmissionsService _submissionsService;
     private readonly IMailService _mailService;
 
-    public SubmissionsController(ISubmissionsService submissionsService, IMailService mailService)
+    public SubmissionController(ISubmissionsService submissionsService, IMailService mailService)
     {
         _submissionsService = submissionsService;
         _mailService = mailService;
