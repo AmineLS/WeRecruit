@@ -22,8 +22,8 @@ builder.Services
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => options.LoginPath = "/login");
 
-builder.Services.AddSingleton<ISubmissionsService, SubmissionService>();
-builder.Services.AddSingleton<ISubmissionsRepository, SubmissionRepository>();
+builder.Services.AddScoped<ISubmissionsService, SubmissionService>();
+builder.Services.AddScoped<ISubmissionsRepository, SubmissionRepository>();
 builder.Services.AddSingleton<IResumeService, ResumeService>(_ =>
 {
     var parentDirectory = builder.Configuration.GetValue<string>("FileBucket");
@@ -49,11 +49,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
-
-var appDbContext = app.Services.GetRequiredService<ApplicationDbContext>();
-appDbContext.Database.EnsureDeleted();
-await appDbContext.Database.EnsureCreatedAsync();
 
 app.Run();
