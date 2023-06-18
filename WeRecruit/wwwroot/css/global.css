@@ -28,9 +28,32 @@ h1, h2, h3, button {
 
 h1 {
     font-size: 22px;
+    font-weight: 600;
+}
+
+button {
     font-weight: 500;
 }
 
-button{
-    font-weight: 500;
+.alert {
+    padding: 12px 16px;
+    max-width: 100%;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.alert-success {
+    color: #075985;
+    background-color: #dbeafe;
+    border-color: #93c5fd;
+}
+
+.alert-error {
+    color: #b91c1c;
+    background-color: #fee2e2;
+    border-color: #fca5a5;
+}
+
+strong{
+    font-weight: 600;
 }
